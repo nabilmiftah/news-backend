@@ -1,0 +1,11 @@
+const express = require('express');
+const router = express.Router();
+const authController = require('../controllers/authController');
+
+// Jalur untuk Register: POST http://localhost:5000/api/auth/register
+router.post('/register', authController.register);
+
+// Jalur untuk Login: POST http://localhost:5000/api/auth/login
+router.post('/login', authController.login);
+
+module.exports = router;
