@@ -3,7 +3,6 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-// Mengambil variabel dari file .env
 const sequelize = new Sequelize(
     process.env.DB_NAME, 
     process.env.DB_USER, 
@@ -11,13 +10,13 @@ const sequelize = new Sequelize(
     {
         host: process.env.DB_HOST,
         dialect: 'mysql',
-        logging: false // Agar terminal tidak penuh dengan log SQL
+        logging: false // Mematikan log query SQL mentah di terminal agar rapi
     }
 );
 
-// Cek Koneksi Database
+// Fungsi untuk mengetes koneksi
 sequelize.authenticate()
-    .then(() => console.log('[DATABASE] MySQL Connected successfully.'))
-    .catch(err => console.error('[DATABASE] Error connecting to MySQL:', err));
+    .then(() => console.log('[DATABASE] Sukses terhubung ke MySQL (news_db).'))
+    .catch(err => console.error('[DATABASE] Gagal koneksi ke MySQL:', err));
 
 module.exports = sequelize;

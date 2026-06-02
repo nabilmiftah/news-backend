@@ -1,16 +1,23 @@
 const express = require('express');
 const dotenv = require('dotenv');
+const db = require('./config/db'); // Mengimpor koneksi database
+const User = require('./models/userModel'); // Mengimpor model User
 
 dotenv.config();
 
 const app = express();
-app.use(express.json()); // Agar API bisa membaca data format JSON
+app.use(express.json());
+
+// Sinkronisasi Database (Membuat tabel otomatis jika belum ada)
+db.sync({ force: false }) // force: false menjaga agar data lama tidak terhapus otomatis
+    .then(() => console.log('[DATABASE] Semua tabel berhasil disinkronisasi.'))
+    .catch(err => console.error('[DATABASE] Gagal sinkronisasi tabel:', err));
 
 app.get('/', (req, res) => {
-    res.json({ message: "Welcome to News API Backend by Miftah & Adif" });
+    res.json({ message: "Welcome to News API Backend - Database Connected!" });
 });
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+    console.log(`[SERVER] Running on port ${PORT}`);
 });

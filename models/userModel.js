@@ -16,7 +16,9 @@ const User = db.define('User', {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
-        validate: { isEmail: true }
+        validate: {
+            isEmail: true
+        }
     },
     password: {
         type: DataTypes.STRING,
@@ -24,10 +26,10 @@ const User = db.define('User', {
     },
     role: {
         type: DataTypes.ENUM('admin', 'writer'),
-        defaultValue: 'writer'
+        defaultValue: 'writer' 
     }
 }, {
-    timestamps: true // Otomatis membuat kolom createdAt & updatedAt
+    timestamps: true // Otomatis membuat kolom createdAt dan updatedAt
 });
 
 module.exports = User;
