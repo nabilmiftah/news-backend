@@ -2,6 +2,8 @@ const express = require('express');
 const dotenv = require('dotenv');
 const db = require('./config/db'); // Mengimpor koneksi database
 const User = require('./models/userModel'); // Mengimpor model User
+const Article = require('./models/articleModel'); // Tambahkan ini
+const Comment = require('./models/commentModel'); // Tambahkan ini
 
 dotenv.config();
 
@@ -18,6 +20,12 @@ app.get('/', (req, res) => {
 });
 
 const PORT = process.env.PORT || 5000;
+const articleRoutes = require('./routes/articleRoutes');
+const commentRoutes = require('./routes/commentRoutes');
+
+// Daftarkan endpoint agar bisa diakses lewat url /api/articles dan /api/comments
+app.use('/api/articles', articleRoutes);
+app.use('/api/comments', commentRoutes);
 app.listen(PORT, () => {
     console.log(`[SERVER] Running on port ${PORT}`);
 });
